@@ -1,9 +1,7 @@
-import './App.css'
-import ThreeDCard from './components/3dcard'
-import Title from './components/title'
-import Subtitle from './components/subtitle'
-import Hobby from './components/hobby'
-import Affiliations from './components/affiliations'
+import Heading from './components/Heading'
+import ProfileCard from './components/ProfileCard'
+import Hobby from './components/Hobby'
+import Affiliations from './components/Affiliations'
 
 function App() {
   return (
@@ -35,18 +33,18 @@ function App() {
       </header>
       <main>
         <section id="about">
-          <Title title="About" />
-          <Subtitle subtitle="Profile" />
+          <Heading as="h2">About</Heading>
+          <Heading as="h3">Profile</Heading>
           <div className="flex justify-center items-center w-full h-full ">
-            <ThreeDCard />
+            <ProfileCard />
           </div>
-          <Subtitle subtitle="Hobby" />
+          <Heading as="h3">Hobby</Heading>
           <div className="flex justify-center items-center w-full h-full pb-4">
             <Hobby />
           </div>
         </section>
         <section id="affiliations">
-          <Title title="Affiliations" />
+          <Heading as="h2">Affiliations</Heading>
           <div className="flex justify-center items-center w-full h-full">
             <Affiliations />
           </div>
