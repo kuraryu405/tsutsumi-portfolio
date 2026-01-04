@@ -18,11 +18,11 @@ export default function affiliations() {
             </div>
           </div>
         </a>
-        <a href="https://tgrgroup.jp"> 
+        <a href="https://github.com/geeken-iniad"> 
           <div className="card glassmorphism w-full h-full">
             <div className="card-body">
-              <img src="src/assets/img/tgr-color.min.svg" alt="tgrgroup" className="w-full h-full object-cover border-radius-lg" />
-              <h3 className="card-title text-center text-lg font-bold">TGR</h3>
+              <img src="src/assets/img/github-mark.png" alt="geeken-iniad" className="w-full h-full object-cover border-radius-lg" />
+              <h3 className="card-title text-center text-lg font-bold">情報技術メディア研究会</h3>
             </div>
           </div>
         </a>

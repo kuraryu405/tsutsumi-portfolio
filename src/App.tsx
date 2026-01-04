@@ -41,13 +41,12 @@ function App() {
             <ThreeDCard />
           </div>
           <Subtitle subtitle="Hobby" />
-          <div className="flex justify-center items-center w-full h-full">
+          <div className="flex justify-center items-center w-full h-full pb-4">
             <Hobby />
           </div>
         </section>
         <section id="affiliations">
           <Title title="Affiliations" />
-          <Subtitle subtitle="Affiliations" />
           <div className="flex justify-center items-center w-full h-full">
             <Affiliations />
           </div>
