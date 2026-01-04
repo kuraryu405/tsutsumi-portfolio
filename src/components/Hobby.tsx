@@ -1,7 +1,7 @@
-import euphoniumImg from '../assets/img/euphonium.jpg'
-import karaokeImg from '../assets/img/karaoke.jpg'
-import pcImg from '../assets/img/pc.jpg'
-import uedaImg from '../assets/img/ueda.jpg'
+import euphoniumImg from '../assets/img/euphonium.webp'
+import karaokeImg from '../assets/img/karaoke.webp'
+import pcImg from '../assets/img/pc.webp'
+import uedaImg from '../assets/img/ueda.webp'
 
 type HobbyItem = {
   img: string

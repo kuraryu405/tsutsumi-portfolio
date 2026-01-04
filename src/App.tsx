@@ -31,6 +31,7 @@ function App() {
           </ul>
         </nav>
       </header>
+
       <main>
         <section id="about">
           <Heading as="h2">About</Heading>
@@ -49,10 +50,9 @@ function App() {
             <Affiliations />
           </div>
         </section>
-
       </main>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,4 +1,4 @@
-import iconGithub from '../assets/img/icon_github.jpg'
+import iconGithub from '../assets/img/icon_github.webp'
 
 export default function ProfileCard() {
   return (

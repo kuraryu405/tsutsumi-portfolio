@@ -1,5 +1,5 @@
-import geekenIniadImg from '../assets/img/tekunotes.jpg'
-import tekunotesImg from '../assets/img/tekunotes.jpg'
+import geekenIniadImg from '../assets/img/tekunotes.webp'
+import tekunotesImg from '../assets/img/tekunotes.webp'
 import tgrImg from '../assets/img/tgr-color.min.svg'
 
 type Affiliation = {
