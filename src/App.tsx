@@ -3,6 +3,7 @@ import ThreeDCard from './components/3dcard'
 import Title from './components/title'
 import Subtitle from './components/subtitle'
 import Hobby from './components/hobby'
+import Affiliations from './components/affiliations'
 
 function App() {
   return (
@@ -42,6 +43,13 @@ function App() {
           <Subtitle subtitle="Hobby" />
           <div className="flex justify-center items-center w-full h-full">
             <Hobby />
+          </div>
+        </section>
+        <section id="affiliations">
+          <Title title="Affiliations" />
+          <Subtitle subtitle="Affiliations" />
+          <div className="flex justify-center items-center w-full h-full">
+            <Affiliations />
           </div>
         </section>
 
