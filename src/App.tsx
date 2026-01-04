@@ -17,12 +17,12 @@ function App() {
           <ul className="flex gap-3 md:gap-6 lg:gap-8 text-sm md:text-base">
             <li>
               <a href="#about" className="hover:text-blue-500 transition-colors duration-200">
-                about
+                About
               </a>
             </li>
             <li>
-              <a href="#skill" className="hover:text-blue-500 transition-colors duration-200">
-                skill
+              <a href="#affiliations" className="hover:text-blue-500 transition-colors duration-200">
+                Affiliations
               </a>
             </li>
             <li>
