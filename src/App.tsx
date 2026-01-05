@@ -2,6 +2,7 @@ import Heading from './components/Heading'
 import ProfileCard from './components/ProfileCard'
 import Hobby from './components/Hobby'
 import Affiliations from './components/Affiliations'
+import Links from './components/Links'
 
 function App() {
   return (
@@ -49,6 +50,11 @@ function App() {
           <div className="flex justify-center items-center w-full h-full">
             <Affiliations />
           </div>
+        </section>
+        <section id="links">
+          <Heading as="h2">Links</Heading>
+          <Heading as="h3">SNS</Heading>
+            <Links />
         </section>
       </main>
     </>
