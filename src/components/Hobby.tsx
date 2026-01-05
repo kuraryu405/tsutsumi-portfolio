@@ -38,7 +38,7 @@ export default function Hobby() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full h-full px-4">
       {HOBBIES.map((item) => (
-        <div key={item.alt} className="card glassmorphism w-full h-full overflow-hidden">
+        <div key={item.alt} className="card glassmorphism w-full h-full overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 cursor-pointer">
           <div className="card-body gap-3">
             <img
               src={item.img}

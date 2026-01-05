@@ -35,7 +35,7 @@ export default function Links() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full h-full px-4">
       {LINKS.map((a) => (
         <a key={a.href} href={a.href} target="_blank" rel="noreferrer" className="block">
-          <div className="card glassmorphism w-full h-full overflow-hidden">
+          <div className="card glassmorphism w-full h-full overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 cursor-pointer">
             <div className="card-body gap-3">
               <img
                 src={a.img}

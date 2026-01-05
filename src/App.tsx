@@ -33,8 +33,8 @@ function App() {
         </nav>
       </header>
 
-      <main>
-        <section id="about">
+      <main className="flex flex-col gap-24 pb-24">
+        <section id="about" className="scroll-mt-24">
           <Heading as="h2">About</Heading>
           <Heading as="h3">Profile</Heading>
           <div className="flex justify-center items-center w-full h-full ">
@@ -45,13 +45,13 @@ function App() {
             <Hobby />
           </div>
         </section>
-        <section id="affiliations">
+        <section id="affiliations" className="scroll-mt-24">
           <Heading as="h2">Affiliations</Heading>
           <div className="flex justify-center items-center w-full h-full">
             <Affiliations />
           </div>
         </section>
-        <section id="links">
+        <section id="links" className="scroll-mt-24">
           <Heading as="h2">Links</Heading>
           <Heading as="h3">SNS</Heading>
             <Links />
