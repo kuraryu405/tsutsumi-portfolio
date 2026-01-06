@@ -4,8 +4,16 @@ import Hobby from './components/Hobby'
 import Affiliations from './components/Affiliations'
 import SNSLinks from './components/SNSLinks'
 import MutualLinks from './components/MutualLinks'
+import ReactGA from 'react-ga4';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    
+    ReactGA.initialize("G-SHLMF6YJTB");
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
+  
   return (
     <>
       <div className="app-background"></div>
