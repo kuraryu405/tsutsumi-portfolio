@@ -36,18 +36,20 @@ const HOBBIES: HobbyItem[] = [
 
 export default function Hobby() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full h-full px-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 w-full max-w-7xl px-4 sm:px-6">
       {HOBBIES.map((item) => (
-        <div key={item.alt} className="card glassmorphism w-full h-full overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-white/10 cursor-pointer">
-          <div className="card-body gap-3">
-            <img
-              src={item.img}
-              alt={item.alt}
-              className="w-full aspect-[4/3] object-cover rounded-2xl"
-              loading="lazy"
-              decoding="async"
-            />
-            <p className="card-text text-center text-sm md:text-base whitespace-pre-line">{item.text}</p>
+        <div key={item.alt} className="glassmorphism p-4 sm:p-5 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-white/15 group">
+          <div className="flex flex-col gap-4">
+            <div className="w-full aspect-[4/3] overflow-hidden rounded-xl">
+              <img
+                src={item.img}
+                alt={item.alt}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <p className="text-sm sm:text-base leading-relaxed text-white/85 whitespace-pre-line text-center">{item.text}</p>
           </div>
         </div>
       ))}

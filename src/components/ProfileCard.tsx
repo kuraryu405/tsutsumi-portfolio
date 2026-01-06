@@ -2,23 +2,23 @@ import iconGithub from '../assets/img/icon_github.webp'
 
 export default function ProfileCard() {
   return (
-    <div className="card glassmorphism w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 shadow-xl mx-auto items-center justify-center">
-      <div className="card-body flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 lg:gap-8 p-4 md:p-6 lg:p-8">
+    <div className="glassmorphism w-full max-w-3xl mx-4 sm:mx-6 p-5 sm:p-6 lg:p-8 rounded-2xl">
+      <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 lg:gap-8">
         <img
           src={iconGithub}
           alt="github icon"
-          className="rounded-full w-32 h-32 md:w-36 md:h-36 lg:w-48 lg:h-48 xl:w-52 xl:h-52 object-cover shadow-lg border-4 border-white flex-shrink-0"
+          className="rounded-full w-28 h-28 sm:w-32 sm:h-32 lg:w-40 lg:h-40 object-cover shadow-lg ring-4 ring-white/30 flex-shrink-0"
           loading="lazy"
           decoding="async"
         />
-        <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1">
-          <h2 className="card-title text-xl md:text-2xl lg:text-4xl xl:text-5xl font-bold mb-2 lg:mb-3">
+        <div className="flex flex-col items-center sm:items-start text-center sm:text-left flex-1 gap-2 sm:gap-3">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
             つつみん
           </h2>
-          <p className="text-xs md:text-sm lg:text-base xl:text-lg text-gray-400 mb-2 md:mb-3 lg:mb-4">
+          <p className="text-sm sm:text-base text-white/60">
             そこらへんの情報系大学生
           </p>
-          <p className="text-xs md:text-sm lg:text-base xl:text-lg leading-relaxed">
+          <p className="text-sm sm:text-base leading-relaxed text-white/85">
             東京の情報系の学部に所属している大学生です。
             <br />
             主にフロントエンドの興味があります。
@@ -26,7 +26,6 @@ export default function ProfileCard() {
             最近はGNU/Linuxの勉強をしています。
             <br />
             まだまだ初学者なので精進したいところ。
-            <br />
           </p>
         </div>
       </div>

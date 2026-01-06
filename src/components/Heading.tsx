@@ -10,14 +10,14 @@ export default function Heading({ as, children }: HeadingProps) {
 
   if (as === 'h2') {
     return (
-      <Tag className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-3 font-bold mb-2 md:mb-2 lg:mb-4 text-left mx-4 md:mx-6 lg:mx-8">
+      <Tag className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 sm:mb-6 text-white px-4 sm:px-6 lg:px-8">
         {children}
       </Tag>
     )
   }
 
   return (
-    <Tag className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold mt-6 mb-4 text-left mx-4 md:mx-6 lg:mx-8 pl-2 md:pl-3">
+    <Tag className="text-base sm:text-lg lg:text-xl font-semibold mt-6 sm:mt-8 mb-4 sm:mb-5 text-white/90 px-4 sm:px-6 lg:px-8 border-l-4 border-sky-400/70 ml-2 sm:ml-4">
       {children}
     </Tag>
   )
