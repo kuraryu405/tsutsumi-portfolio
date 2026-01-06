@@ -58,7 +58,7 @@ function App() {
           <div className="flex justify-center items-center w-full">
             <SNSLinks />
           </div>
-          <Heading as="h3">相互リンク</Heading>
+          <Heading as="h3">Friends</Heading>
           <div className="flex justify-center items-center w-full">
             <MutualLinks />
           </div>
