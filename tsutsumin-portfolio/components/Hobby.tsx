@@ -1,8 +1,3 @@
-import euphoniumImg from '../assets/img/euphonium.webp'
-import karaokeImg from '../assets/img/karaoke.webp'
-import pcImg from '../assets/img/pc.webp'
-import uedaImg from '../assets/img/ueda.webp'
-
 type HobbyItem = {
   img: string
   alt: string
@@ -11,26 +6,26 @@ type HobbyItem = {
 
 const HOBBIES: HobbyItem[] = [
   {
-    img: uedaImg,
-    alt: 'camera',
-    text: '一眼レフを使って写真を撮るのが好き。\nもっといいカメラを使いたい。\n1DXとかいいなぁって思ってる。',
+    img: "/img/ueda.webp",
+    alt: "camera",
+    text: "一眼レフを使って写真を撮るのが好き。\nもっといいカメラを使いたい。\n1DXとかいいなぁって思ってる。",
   },
   {
-    img: pcImg,
-    alt: 'pc',
+    img: "/img/pc.webp",
+    alt: "pc",
     text:
-      'パソコンで遊ぶのも好き。\n自作PC(windows/今後はArchLinuxの予定)\nMacBook Pro M4(macOS)\nVivoBook (Arch Linux/Omarchy)',
+      "パソコンで遊ぶのも好き。\n自作PC(windows/今後はArchLinuxの予定)\nMacBook Pro M4(macOS)\nVivoBook (Arch Linux/Omarchy)",
   },
   {
-    img: euphoniumImg,
-    alt: 'music',
+    img: "/img/euphonium.webp",
+    alt: "music",
     text:
-      '大学の吹奏楽サークルでユーフォニアムを吹いています。\nYEP-642S/Bach 5G\n最近は大河ドラマのサントラをずっと聴いてる',
+      "大学の吹奏楽サークルでユーフォニアムを吹いています。\nYEP-642S/Bach 5G\n最近は大河ドラマのサントラをずっと聴いてる",
   },
   {
-    img: karaokeImg,
-    alt: 'karaoke',
-    text: '歌を歌うことも好き。\n米津の曲を歌うのが好き。\nよく聴くのはオルタナティブだけど。',
+    img: "/img/karaoke.webp",
+    alt: "karaoke",
+    text: "歌を歌うことも好き。\n米津の曲を歌うのが好き。\nよく聴くのはオルタナティブだけど。",
   },
 ]
 

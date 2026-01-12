@@ -1,7 +1,3 @@
-import twitterImg from '../assets/img/x.svg'
-import githubImg from '../assets/img/github.svg'
-import qitaImg from '../assets/img/qiita-icon.png'
-
 type SNSLink = {
   href: string
   title: string
@@ -13,20 +9,20 @@ const SNS_LINKS: SNSLink[] = [
   {
     href: 'https://x.com/tsutsumin_dev',
     title: 'Twitter(X)',
-    img: twitterImg,
-    alt: 'tekunotes',
+    img: '/img/x.svg',
+    alt: 'twitter',
   },
   {
     href: 'https://github.com/kuraryu405',
     title: 'GitHub',
-    img: githubImg,
-    alt: 'tgrgroup',
+    img: '/img/github.svg',
+    alt: 'github',
   },
   {
     href: 'https://qiita.com/kuraryu405',
     title: 'Qiita',
-    img: qitaImg,
-    alt: 'qita-icon',
+    img: '/img/qiita-icon.png',
+    alt: 'qiita-icon',
   },
 ]
 

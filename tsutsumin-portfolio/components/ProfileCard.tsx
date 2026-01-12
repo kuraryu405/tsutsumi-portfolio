@@ -1,11 +1,9 @@
-import iconGithub from '../assets/img/icon_github.webp'
-
 export default function ProfileCard() {
   return (
     <div className="glassmorphism w-full max-w-3xl mx-4 sm:mx-6 p-5 sm:p-6 lg:p-8 rounded-2xl">
       <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-6 lg:gap-8">
         <img
-          src={iconGithub}
+          src="/img/icon_github.webp"
           alt="github icon"
           className="rounded-full w-28 h-28 sm:w-32 sm:h-32 lg:w-40 lg:h-40 object-cover shadow-lg ring-4 ring-white/30 flex-shrink-0"
           loading="lazy"

@@ -1,7 +1,3 @@
-import geekenIniadImg from '../assets/img/tekunotes.webp'
-import tekunotesImg from '../assets/img/tekunotes.webp'
-import tgrImg from '../assets/img/tgr-color.min.svg'
-
 type Affiliation = {
   href: string
   title: string
@@ -14,21 +10,21 @@ const AFFILIATIONS: Affiliation[] = [
   {
     href: 'https://tekunotes.com',
     title: 'TEKUNOTES',
-    img: tekunotesImg,
+    img: '/img/tekunotes.webp',
     alt: 'tekunotes',
     description: 'TEKUNOTESでガジェット系の記事を書いたりしています。',
   },
   {
     href: 'https://tgrgroup.jp',
     title: 'TGR',
-    img: tgrImg,
+    img: '/img/tgr-color.min.svg',
     alt: 'tgrgroup',
     description: 'TGRは学生の開発コミュニティです。',
   },
   {
     href: 'https://github.com/geeken-iniad',
     title: 'GeeKen',
-    img: geekenIniadImg,
+    img: '/img/tekunotes.webp',
     alt: 'geeken-iniad',
     description: 'GeeKenは情報技術メディア研究会の略称です。',
   },  

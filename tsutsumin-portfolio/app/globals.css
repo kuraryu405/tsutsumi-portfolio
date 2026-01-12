@@ -31,7 +31,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: -10;
-  background-image: url("./assets/img/wall.webp");
+  background-image: url("/img/wall.webp");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -46,4 +46,3 @@ body {
   background: rgba(0, 0, 0, 0.35);
   pointer-events: none;
 }
-
