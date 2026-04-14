@@ -24,7 +24,7 @@ const AFFILIATIONS: Affiliation[] = [
   {
     href: 'https://github.com/geeken-iniad',
     title: 'GeeKen',
-    img: '/img/tekunotes.webp',
+    img: '/img/geeken.webp',
     alt: 'geeken-iniad',
     description: 'GeeKenは情報技術メディア研究会の略称です。',
   },  
