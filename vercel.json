@@ -1,0 +1,4 @@
+{
+  "installCommand": "cd tsutsumin-portfolio && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd tsutsumin-portfolio && pnpm build"
+}
