@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "installCommand": "npx pnpm@10.23.0 --dir tsutsumin-portfolio install --no-frozen-lockfile",
-  "buildCommand": "npx pnpm@10.23.0 --dir tsutsumin-portfolio build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
   "outputDirectory": "tsutsumin-portfolio/.next"
 }

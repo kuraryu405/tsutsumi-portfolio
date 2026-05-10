@@ -9,5 +9,8 @@
     "build": "pnpm --filter tsutsumin-portfolio build",
     "start": "pnpm --filter tsutsumin-portfolio start",
     "lint": "pnpm --filter tsutsumin-portfolio lint"
+  },
+  "dependencies": {
+    "next": "16.1.1"
   }
 }
