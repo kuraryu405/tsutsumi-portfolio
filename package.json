@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter tsutsumin-portfolio dev",
-    "build": "pnpm --filter tsutsumin-portfolio build",
+    "build": "pnpm --dir tsutsumin-portfolio install --frozen-lockfile && pnpm --dir tsutsumin-portfolio build",
     "start": "pnpm --filter tsutsumin-portfolio start",
     "lint": "pnpm --filter tsutsumin-portfolio lint"
   }
