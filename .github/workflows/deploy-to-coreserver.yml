@@ -33,21 +33,27 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build Next.js static export
         run: pnpm build
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass rsync
-      - name: Deploy via rsync over SSH
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+      - name: Install ssh key and deploy via rsync
         env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SFTP_HOST: ${{ secrets.SFTP_HOST }}
           SFTP_USER: ${{ secrets.SFTP_USER }}
-          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
           SFTP_PORT: ${{ secrets.SFTP_PORT }}
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
         run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$SFTP_PORT" -H "$SFTP_HOST" >> ~/.ssh/known_hosts
+
           echo "Debug: Source directory contents:"
           ls -la "$SOURCE"
           echo "File count: $(find $SOURCE -type f | wc -l)"
-          sshpass -p "$SFTP_PASSWORD" rsync -avz --delete \
-            -e "ssh -p $SFTP_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=3" \
-            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET" \
-            --timeout=60
+          ssh -i ~/.ssh/deploy_key -p "$SFTP_PORT" -o StrictHostKeyChecking=no \
+            "$SFTP_USER@$SFTP_HOST" "echo 'SSH connection successful'"
+          rsync -avz --delete --timeout=60 \
+            -e "ssh -i ~/.ssh/deploy_key -p $SFTP_PORT -o StrictHostKeyChecking=no" \
+            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET"
