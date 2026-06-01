@@ -33,20 +33,21 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build Next.js static export
         run: pnpm build
-      - name: Install lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
-      - name: Deploy via SFTP
+      - name: Deploy via rsync over SSH
+        uses: easingthemes/ssh-deploy@main
         env:
-          SFTP_HOST: ${{ secrets.SFTP_HOST }}
-          SFTP_USER: ${{ secrets.SFTP_USER }}
-          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
-          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SSH_PRIVATE_KEY: ""
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
+          REMOTE_HOST: ${{ secrets.SFTP_HOST }}
+          REMOTE_USER: ${{ secrets.SFTP_USER }}
+          REMOTE_PORT: ${{ secrets.SFTP_PORT }}
+          REMOTE_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
-        run: |
-          echo "Debug: Listing source directory..."
-          ls -la "$SOURCE"
-          echo "Debug: File count in source:"
-          find "$SOURCE" -type f | wc -l
-          echo "Debug: Connecting to SFTP..."
-          lftp -e "set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -p $SFTP_PORT'; set net:timeout 60; set net:reconnect-interval-base 10; set net:max-retries 5; mirror -R --delete --verbose $SOURCE $TARGET; bye" -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST"
+          SCRIPT_BEFORE: |
+            echo "Source directory contents:"
+            ls -la $SOURCE
+            echo "File count:"
+            find $SOURCE -type f | wc -l
+          SSH_KNOWN_HOSTS: "false"
+          SSH_ARGS: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=3"
+          ARGS: "-avz --delete --exclude '.next/cache' --timeout=30 --contimeout=30"
