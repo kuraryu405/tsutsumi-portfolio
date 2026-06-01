@@ -44,7 +44,9 @@ jobs:
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
         run: |
-          lftp -c "set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -p $SFTP_PORT'; \
-           open -u $SFTP_USER,$SFTP_PASSWORD sftp://$SFTP_HOST; \
-           mirror -R --delete --verbose $SOURCE $TARGET; \
-           bye"
+          echo "Debug: Listing source directory..."
+          ls -la "$SOURCE"
+          echo "Debug: File count in source:"
+          find "$SOURCE" -type f | wc -l
+          echo "Debug: Connecting to SFTP..."
+          lftp -e "set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -p $SFTP_PORT'; set net:timeout 60; set net:reconnect-interval-base 10; set net:max-retries 5; mirror -R --delete --verbose $SOURCE $TARGET; bye" -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST"
