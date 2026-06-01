@@ -33,21 +33,21 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build Next.js static export
         run: pnpm build
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass rsync
       - name: Deploy via rsync over SSH
-        uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ""
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
-          REMOTE_HOST: ${{ secrets.SFTP_HOST }}
-          REMOTE_USER: ${{ secrets.SFTP_USER }}
-          REMOTE_PORT: ${{ secrets.SFTP_PORT }}
-          REMOTE_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
-          SCRIPT_BEFORE: |
-            echo "Source directory contents:"
-            ls -la $SOURCE
-            echo "File count:"
-            find $SOURCE -type f | wc -l
-          SSH_KNOWN_HOSTS: "false"
-          SSH_ARGS: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=3"
-          ARGS: "-avz --delete --exclude '.next/cache' --timeout=30 --contimeout=30"
+        run: |
+          echo "Debug: Source directory contents:"
+          ls -la "$SOURCE"
+          echo "File count: $(find $SOURCE -type f | wc -l)"
+          sshpass -p "$SFTP_PASSWORD" rsync -avz --delete \
+            -e "ssh -p $SFTP_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=3" \
+            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET" \
+            --timeout=60 --contimeout=30
