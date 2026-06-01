@@ -1,10 +1,8 @@
 name: Deploy to CoreServer
-
 on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     name: Build and Deploy to CoreServer
@@ -42,20 +40,18 @@ jobs:
       - name: Build Next.js static export
         run: pnpm build
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SFTP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass rsync
 
       - name: Deploy via SFTP
-        uses: easingthemes/ssh-deploy@v4.1.8
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.SFTP_HOST }}
-          REMOTE_USER: ${{ secrets.SFTP_USER }}
-          REMOTE_PORT: ${{ secrets.SFTP_PORT }}
-          SOURCE: "tsutsumin-portfolio/.next/static-export/"
-          TARGET: ~/public_html/kuraryu.jp/
-          RSYNC_ARGS: -avz --delete
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SOURCE: "out/"
+          TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
+        run: |
+          sshpass -p "$SFTP_PASSWORD" rsync -avz --delete \
+            -e "sshpass -p \"$SFTP_PASSWORD\" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $SFTP_PORT" \
+            "$SOURCE/" "$SFTP_USER@$SFTP_HOST:$TARGET"
