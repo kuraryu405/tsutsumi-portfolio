@@ -41,8 +41,8 @@ jobs:
       - name: Build Next.js static export
         run: pnpm build
 
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass rsync lftp
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Deploy via SFTP
         env:
@@ -53,6 +53,7 @@ jobs:
           SOURCE: "out/"
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
         run: |
-          sshpass -p "$SFTP_PASSWORD" rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $SFTP_PORT" \
-            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET"
+          lftp -c "set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -p $SFTP_PORT'; \
+          open -u $SFTP_USER,$SFTP_PASSWORD sftp://$SFTP_HOST; \
+          mirror -R --delete --verbose $SOURCE $TARGET; \
+          bye"
