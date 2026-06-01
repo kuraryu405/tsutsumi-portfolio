@@ -50,7 +50,7 @@ jobs:
           SFTP_USER: ${{ secrets.SFTP_USER }}
           SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
           SFTP_PORT: ${{ secrets.SFTP_PORT }}
-          SOURCE: "out/"
+          SOURCE: "tsutsumin-portfolio/.next/static-export/"
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
         run: |
           lftp -c "set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -p $SFTP_PORT'; \
