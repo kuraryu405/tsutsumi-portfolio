@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     name: Build and Deploy to CoreServer
@@ -41,7 +42,7 @@ jobs:
         run: pnpm build
 
       - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass rsync
+        run: sudo apt-get update && sudo apt-get install -y sshpass rsync lftp
 
       - name: Deploy via SFTP
         env:
@@ -53,5 +54,5 @@ jobs:
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
         run: |
           sshpass -p "$SFTP_PASSWORD" rsync -avz --delete \
-            -e "sshpass -p \"$SFTP_PASSWORD\" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $SFTP_PORT" \
-            "$SOURCE/" "$SFTP_USER@$SFTP_HOST:$TARGET"
+            -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $SFTP_PORT" \
+            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET"
