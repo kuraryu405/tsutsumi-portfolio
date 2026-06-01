@@ -42,12 +42,20 @@ jobs:
       - name: Build Next.js static export
         run: pnpm build
 
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SFTP_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
       - name: Deploy via SFTP
-        uses: easingthemes/ssh-deploy@main
+        uses: easingthemes/ssh-deploy@v4.1.8
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SFTP_HOST }}
           REMOTE_USER: ${{ secrets.SFTP_USER }}
           REMOTE_PORT: ${{ secrets.SFTP_PORT }}
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
           TARGET: ~/public_html/kuraryu.jp/
+          RSYNC_ARGS: -avz --delete
