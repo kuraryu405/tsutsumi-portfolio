@@ -50,4 +50,4 @@ jobs:
           sshpass -p "$SFTP_PASSWORD" rsync -avz --delete \
             -e "ssh -p $SFTP_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=3" \
             "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET" \
-            --timeout=60 --contimeout=30
+            --timeout=60
