@@ -46,7 +46,7 @@ jobs:
           CORESERVER_ACCOUNT: "kuraryu"
           CORESERVER_SERVER_NAME: "m34.coreserver.jp"
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
-          TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
+          TARGET: "public_html/www.kuraryu.jp/"
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
@@ -72,7 +72,7 @@ jobs:
           ls -la "$SOURCE"
           echo "File count: $(find $SOURCE -type f | wc -l)"
           ssh -i ~/.ssh/deploy_key -p "$SFTP_PORT" -o StrictHostKeyChecking=no \
-            "$SFTP_USER@$SFTP_HOST" "echo 'SSH connection successful'"
+            "$SFTP_USER@$SFTP_HOST" "mkdir -p '$TARGET' && echo 'SSH connection successful'"
           rsync -avz --delete --timeout=60 \
             -e "ssh -i ~/.ssh/deploy_key -p $SFTP_PORT -o StrictHostKeyChecking=no" \
             "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET"
