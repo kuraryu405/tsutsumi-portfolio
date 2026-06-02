@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 jobs:
   deploy:
     name: Build and Deploy to CoreServer
@@ -47,7 +48,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "$SFTP_PORT" -H "$SFTP_HOST" >> ~/.ssh/known_hosts
+          echo "Runner public IP: $(curl -fsSL https://api.ipify.org || true)"
+          ssh-keyscan -p "$SFTP_PORT" -H "$SFTP_HOST" >> ~/.ssh/known_hosts || true
 
           echo "Debug: Source directory contents:"
           ls -la "$SOURCE"
