@@ -42,13 +42,30 @@ jobs:
           SFTP_HOST: ${{ secrets.SFTP_HOST }}
           SFTP_USER: ${{ secrets.SFTP_USER }}
           SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          CORESERVER_API_KEY: ${{ secrets.CORESERVER_API_KEY }}
+          CORESERVER_ACCOUNT: "kuraryu"
+          CORESERVER_SERVER_NAME: "m34.coreserver.jp"
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
           TARGET: "/home/kuraryu/public_html/www.kuraryu.jp/"
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          echo "Runner public IP: $(curl -fsSL https://api.ipify.org || true)"
+
+          RUNNER_IP="$(curl -fsSL https://api.ipify.org)"
+          echo "Runner public IP: $RUNNER_IP"
+          ALLOW_RESPONSE="$(
+            curl -fsS -X POST "https://api.coreserver.jp/v1/tool/ssh_ip_allow" \
+              --data-urlencode "account=$CORESERVER_ACCOUNT" \
+              --data-urlencode "server_name=$CORESERVER_SERVER_NAME" \
+              --data-urlencode "api_secret_key=$CORESERVER_API_KEY" \
+              --data-urlencode "param[addr]=$RUNNER_IP"
+          )"
+          echo "CoreServer SSH IP allow response: $ALLOW_RESPONSE"
+          echo "$ALLOW_RESPONSE" | grep -q '"status_code":200'
+          echo "Waiting for CoreServer SSH IP allow propagation..."
+          sleep 300
+
           ssh-keyscan -p "$SFTP_PORT" -H "$SFTP_HOST" >> ~/.ssh/known_hosts || true
 
           echo "Debug: Source directory contents:"
