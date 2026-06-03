@@ -55,16 +55,21 @@ jobs:
 
           RUNNER_IP="$(curl -fsSL https://api.ipify.org)"
           echo "Runner public IP: $RUNNER_IP"
-          ALLOW_RESPONSE="$(
-            curl -fsS --retry 5 --retry-all-errors --retry-delay 5 \
-              -H "Content-Type: application/x-www-form-urlencoded" \
+          ALLOW_RESPONSE_FILE="$(mktemp)"
+          ALLOW_STATUS="$(
+            curl -sS --retry 5 --retry-all-errors --retry-delay 5 \
+              -o "$ALLOW_RESPONSE_FILE" \
+              -w "%{http_code}" \
               -X POST "https://api.coreserver.jp/v1/tool/ssh_ip_allow" \
-              --data-urlencode "account=$CORESERVER_ACCOUNT" \
-              --data-urlencode "server_name=$CORESERVER_SERVER_NAME" \
-              --data-urlencode "api_secret_key=$CORESERVER_API_KEY" \
-              --data-urlencode "param[addr]=$RUNNER_IP"
+              --form-string "account=$CORESERVER_ACCOUNT" \
+              --form-string "server_name=$CORESERVER_SERVER_NAME" \
+              --form-string "api_secret_key=$CORESERVER_API_KEY" \
+              --form-string "param[addr]=$RUNNER_IP"
           )"
+          ALLOW_RESPONSE="$(cat "$ALLOW_RESPONSE_FILE")"
+          echo "CoreServer SSH IP allow HTTP status: $ALLOW_STATUS"
           echo "CoreServer SSH IP allow response: $ALLOW_RESPONSE"
+          test "$ALLOW_STATUS" = "200"
           echo "$ALLOW_RESPONSE" | grep -q '"status_code":200'
           echo "Waiting for CoreServer SSH IP allow propagation..."
           sleep 300
