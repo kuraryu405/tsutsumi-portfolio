@@ -46,7 +46,8 @@ jobs:
           CORESERVER_ACCOUNT: "kuraryu"
           CORESERVER_SERVER_NAME: "m34.coreserver.jp"
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
-          TARGET: "public_html/www.kuraryu.jp/"
+          WWW_TARGET: "public_html/www.kuraryu.jp/"
+          APEX_TARGET: "public_html/kuraryu.jp/"
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
@@ -72,7 +73,10 @@ jobs:
           ls -la "$SOURCE"
           echo "File count: $(find $SOURCE -type f | wc -l)"
           ssh -i ~/.ssh/deploy_key -p "$SFTP_PORT" -o StrictHostKeyChecking=no \
-            "$SFTP_USER@$SFTP_HOST" "mkdir -p '$TARGET' && echo 'SSH connection successful'"
+            "$SFTP_USER@$SFTP_HOST" "mkdir -p '$WWW_TARGET' '$APEX_TARGET' && echo 'SSH connection successful'"
           rsync -avz --delete --timeout=60 \
             -e "ssh -i ~/.ssh/deploy_key -p $SFTP_PORT -o StrictHostKeyChecking=no" \
-            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$TARGET"
+            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$WWW_TARGET"
+          rsync -avz --delete --timeout=60 \
+            -e "ssh -i ~/.ssh/deploy_key -p $SFTP_PORT -o StrictHostKeyChecking=no" \
+            "$SOURCE" "$SFTP_USER@$SFTP_HOST:$APEX_TARGET"
