@@ -56,7 +56,9 @@ jobs:
           RUNNER_IP="$(curl -fsSL https://api.ipify.org)"
           echo "Runner public IP: $RUNNER_IP"
           ALLOW_RESPONSE="$(
-            curl -fsS -X POST "https://api.coreserver.jp/v1/tool/ssh_ip_allow" \
+            curl -fsS --retry 5 --retry-all-errors --retry-delay 5 \
+              -H "Content-Type: application/x-www-form-urlencoded" \
+              -X POST "https://api.coreserver.jp/v1/tool/ssh_ip_allow" \
               --data-urlencode "account=$CORESERVER_ACCOUNT" \
               --data-urlencode "server_name=$CORESERVER_SERVER_NAME" \
               --data-urlencode "api_secret_key=$CORESERVER_API_KEY" \
