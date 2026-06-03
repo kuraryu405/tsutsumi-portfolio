@@ -41,10 +41,10 @@ jobs:
           SFTP_HOST: ${{ secrets.SFTP_HOST }}
           SFTP_USER: ${{ secrets.SFTP_USER }}
           SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
-          FTP_PORT: "21"
+          FTP_PORT: ${{ secrets.FTP_PORT }}
           SOURCE: "tsutsumin-portfolio/.next/static-export/"
-          WWW_TARGET: "public_html/www.kuraryu.jp/"
-          APEX_TARGET: "public_html/kuraryu.jp/"
+          WWW_TARGET: ${{ secrets.FTP_WWW_TARGET }}
+          APEX_TARGET: ${{ secrets.FTP_APEX_TARGET }}
         run: |
           echo "Debug: Source directory contents:"
           ls -la "$SOURCE"
