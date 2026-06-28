@@ -19,16 +19,12 @@ export default function ProfileCard() {
           <p className="text-sm sm:text-base leading-relaxed text-white/85">
             東京の情報系の学部に所属している大学生です。
             <br />
-            主にフロントエンドの興味があります。
-            <br />
-            最近はGNU/Linuxの勉強をしています。
+            フロントエンド、バックエンド問わず技術に興味があります。
             <br />
             まだまだ初学者なので精進したいところ。
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-

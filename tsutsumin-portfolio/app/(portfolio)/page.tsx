@@ -4,6 +4,7 @@ import Hobby from "@/components/Hobby";
 import Affiliations from "@/components/Affiliations";
 import SNSLinks from "@/components/SNSLinks";
 import MutualLinks from "@/components/MutualLinks";
+import Works from "@/components/Works";
 
 export default function PortfolioPage() {
   return (
@@ -11,22 +12,31 @@ export default function PortfolioPage() {
       <div className="app-background"></div>
       <header className="glassmorphism flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-white mx-3 sm:mx-6 lg:mx-8 my-4 mb-6 sm:mb-8 rounded-2xl">
         <div className="font-bold tracking-wide text-base sm:text-lg lg:text-xl">
-          つつみん
+          つつみ
         </div>
         <nav>
           <ul className="flex gap-4 sm:gap-6 lg:gap-8 text-xs sm:text-sm lg:text-base">
             <li>
-              <a href="#about" className="hover:text-sky-400 transition-colors duration-200">
+              <a
+                href="#about"
+                className="hover:text-sky-400 transition-colors duration-200"
+              >
                 About
               </a>
             </li>
             <li>
-              <a href="#affiliations" className="hover:text-sky-400 transition-colors duration-200">
+              <a
+                href="#affiliations"
+                className="hover:text-sky-400 transition-colors duration-200"
+              >
                 Affiliations
               </a>
             </li>
             <li>
-              <a href="#links" className="hover:text-sky-400 transition-colors duration-200">
+              <a
+                href="#links"
+                className="hover:text-sky-400 transition-colors duration-200"
+              >
                 Links
               </a>
             </li>
@@ -44,6 +54,12 @@ export default function PortfolioPage() {
           <Heading as="h3">Hobby</Heading>
           <div className="flex justify-center items-center w-full">
             <Hobby />
+          </div>
+        </section>
+        <section>
+          <Heading as="h2">Works</Heading>
+          <div className="flex justify-center items-center w-full">
+            <Works />
           </div>
         </section>
         <section id="affiliations" className="scroll-mt-20">

@@ -1,8 +1,8 @@
 type HobbyItem = {
-  img: string
-  alt: string
-  text: string
-}
+  img: string;
+  alt: string;
+  text: string;
+};
 
 const HOBBIES: HobbyItem[] = [
   {
@@ -13,27 +13,28 @@ const HOBBIES: HobbyItem[] = [
   {
     img: "/img/pc.webp",
     alt: "pc",
-    text:
-      "パソコンで遊ぶのも好き。\n自作PC(windows/今後はArchLinuxの予定)\nMacBook Pro M4(macOS)\nVivoBook (Arch Linux/Omarchy)",
+    text: "パソコンで遊ぶのも好き。\n自作PC(Arch Linux)\nMacBook Pro M4(macOS)\nVivoBook (Arch Linux)",
   },
   {
     img: "/img/euphonium.webp",
     alt: "music",
-    text:
-      "大学の吹奏楽サークルでユーフォニアムを吹いています。\nYEP-642S/Bach 5G\n最近は大河ドラマのサントラをずっと聴いてる",
+    text: "大学の吹奏楽サークルでユーフォニアムを吹いています。",
   },
   {
     img: "/img/karaoke.webp",
     alt: "karaoke",
-    text: "歌を歌うことも好き。\n米津の曲を歌うのが好き。\nよく聴くのはオルタナティブだけど。",
+    text: "歌を歌うことも好き。\nただ聴く音楽はオルタナティブが多いです。\n　時速36kmというバンドが好き。",
   },
-]
+];
 
 export default function Hobby() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 w-full max-w-7xl px-4 sm:px-6">
       {HOBBIES.map((item) => (
-        <div key={item.alt} className="glassmorphism p-4 sm:p-5 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-white/15 group">
+        <div
+          key={item.alt}
+          className="glassmorphism p-4 sm:p-5 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:bg-white/15 group"
+        >
           <div className="flex flex-col gap-4">
             <div className="w-full aspect-[4/3] overflow-hidden rounded-xl">
               <img
@@ -44,12 +45,12 @@ export default function Hobby() {
                 decoding="async"
               />
             </div>
-            <p className="text-sm sm:text-base leading-relaxed text-white/85 whitespace-pre-line text-center">{item.text}</p>
+            <p className="text-sm sm:text-base leading-relaxed text-white/85 whitespace-pre-line text-center">
+              {item.text}
+            </p>
           </div>
         </div>
       ))}
     </div>
-  )
+  );
 }
-
-
