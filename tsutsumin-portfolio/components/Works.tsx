@@ -23,13 +23,14 @@ const WORKS: Work[] = [
     description:
       "匿名質問webゲームです。友達との飲み会や合宿や打ち上げなどの余興にお使いください",
   },
-  //   {
-  //     href:,
-  //     title:,
-  //     img:,
-  //     alt:,
-  //     description:
-  //   },
+    {
+    href: "https://kuraryu.jp/long-long-url",
+    title: "long-long-url",
+    img: "/img/longurl.png",
+    alt: "long-long-url",
+    description:
+      "日常を不便にしたくて作りました。URLって＃以降は無視されるんですね。初めて知りました",
+  },
 ];
 
 export default function Works() {
