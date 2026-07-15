@@ -50,15 +50,36 @@ jobs:
           ls -la "$SOURCE"
           echo "File count: $(find $SOURCE -type f | wc -l)"
 
-          lftp -u "$SFTP_USER","$SFTP_PASSWORD" -p "$FTP_PORT" "$SFTP_HOST" <<EOF
-          set cmd:fail-exit yes
-          set ftp:ssl-allow true
-          set ssl:verify-certificate false
-          set net:timeout 30
-          set net:max-retries 3
-          mkdir -p "$WWW_TARGET"
-          mkdir -p "$APEX_TARGET"
-          mirror --reverse --delete --verbose "$SOURCE" "$WWW_TARGET"
-          mirror --reverse --delete --verbose "$SOURCE" "$APEX_TARGET"
-          bye
-          EOF
+          emit_site_mirror_commands() {
+            target="$1"
+
+            if [ -z "$target" ]; then
+              return
+            fi
+
+            printf 'mkdir -p "%s"\n' "$target"
+
+            # The CoreServer web root also hosts standalone sub-sites such as
+            # /Happa and /long-long-url. Do not deletion-sync the whole root.
+            for app_dir in _next static; do
+              if [ -d "$SOURCE$app_dir" ]; then
+                printf 'mkdir -p "%s/%s"\n' "$target" "$app_dir"
+                printf 'mirror --reverse --delete --verbose "%s%s/" "%s/%s/"\n' "$SOURCE" "$app_dir" "$target" "$app_dir"
+              fi
+            done
+
+            printf 'mirror --reverse --verbose "%s" "%s"\n' "$SOURCE" "$target"
+          }
+
+          {
+            echo "set cmd:fail-exit yes"
+            echo "set ftp:ssl-allow true"
+            echo "set ssl:verify-certificate false"
+            echo "set net:timeout 30"
+            echo "set net:max-retries 3"
+            emit_site_mirror_commands "$WWW_TARGET"
+            emit_site_mirror_commands "$APEX_TARGET"
+            echo "bye"
+          } > .deploy-lftp
+
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" -p "$FTP_PORT" "$SFTP_HOST" < .deploy-lftp
